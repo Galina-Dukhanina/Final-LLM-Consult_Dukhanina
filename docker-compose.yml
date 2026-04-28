@@ -37,7 +37,7 @@ services:
     env_file:
       - ./bot_service/.env
     command: >
-      celery -A app.infra.celery_app.celery_app worker -l info
+      uv run celery -A app.infra.celery_app.celery_app worker -l info
     depends_on:
       - rabbitmq
       - redis
