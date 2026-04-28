@@ -1,0 +1,44 @@
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  auth_service:
+    build:
+      context: ./auth_service
+    env_file:
+      - ./auth_service/.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - rabbitmq
+      - redis
+
+  bot_service:
+    build:
+      context: ./bot_service
+    env_file:
+      - ./bot_service/.env
+    depends_on:
+      - rabbitmq
+      - redis
+      - auth_service
+
+  bot_worker:
+    build:
+      context: ./bot_service
+    env_file:
+      - ./bot_service/.env
+    command: >
+      celery -A app.infra.celery_app.celery_app worker -l info
+    depends_on:
+      - rabbitmq
+      - redis
+      
