@@ -1,6 +1,7 @@
 import asyncio
 
 from aiogram import Router
+from aiogram.enums import ChatAction
 from aiogram.filters import Command
 from aiogram.types import Message
 
@@ -47,6 +48,8 @@ async def _wait_and_send_result(
             for part in _split_telegram(value):
                 await message.answer(part)
             return
+
+        await message.bot.send_chat_action(chat_id=chat_id, action=ChatAction.TYPING)
         await asyncio.sleep(1)
 
     await message.answer("Ответ задерживается. Попробуйте ещё раз через минуту.")

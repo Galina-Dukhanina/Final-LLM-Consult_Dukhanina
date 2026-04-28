@@ -26,7 +26,13 @@ async def chat_completion(prompt: str) -> str:
 
     payload: dict[str, Any] = {
         "model": settings.OPENROUTER_MODEL,
-        "messages": [{"role": "user", "content": prompt}],
+        "messages": [
+            {
+                "role": "system",
+                "content": "Отвечай по-русски. Отвечай кратко и по делу.",
+            },
+            {"role": "user", "content": prompt},
+        ],
     }
 
     timeout = httpx.Timeout(60.0)
