@@ -16,7 +16,7 @@ services:
     env_file:
       - ./auth_service/.env
     ports:
-      - "8000:8000"
+      - "9000:8000"
     depends_on:
       - rabbitmq
       - redis
@@ -41,4 +41,3 @@ services:
     depends_on:
       - rabbitmq
       - redis
-      
