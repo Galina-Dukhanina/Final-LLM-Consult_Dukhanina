@@ -99,6 +99,14 @@ docker compose up -d --build
 ### Общая активность брокера (`Overview`)
 ![RabbitMQ overview](Screens/rabbitmq-overview.png)
 
+## Скриншоты успешно выполненного тестирования
+
+### Auth Service tests (`uv run pytest -q`)
+![Auth tests passed](Screens/tests-auth-passed.png)
+
+### Bot Service tests (`uv run pytest -q`)
+![Bot tests passed](Screens/tests-bot-passed.png)
+
 ## Тестирование
 
 Локальный запуск тестов (без Docker и внешних сервисов):
