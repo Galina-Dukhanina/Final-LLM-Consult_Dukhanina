@@ -91,6 +91,14 @@ docker compose up -d --build
 
 ![Telegram bot flow](Screens/tg-bot.png)
 
+## Скриншоты RabbitMQ (очереди и активность)
+
+### Очереди Celery в RabbitMQ (`Queues and Streams`)
+![RabbitMQ queues](Screens/rabbitmq-queues.png)
+
+### Общая активность брокера (`Overview`)
+![RabbitMQ overview](Screens/rabbitmq-overview.png)
+
 ## Тестирование
 
 Локальный запуск тестов (без Docker и внешних сервисов):
