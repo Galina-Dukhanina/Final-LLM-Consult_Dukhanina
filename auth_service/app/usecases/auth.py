@@ -1,4 +1,4 @@
-from jose import JWTError
+from jose import ExpiredSignatureError, JWTError
 
 from app.core.exceptions import (
     InvalidCredentialsError,
@@ -52,6 +52,8 @@ class AuthUsecase:
     async def me(self, *, token: str) -> UserPublic:
         try:
             payload = decode_token(token)
+        except ExpiredSignatureError:
+            raise TokenExpiredError()
         except JWTError:
             raise InvalidTokenError()
 

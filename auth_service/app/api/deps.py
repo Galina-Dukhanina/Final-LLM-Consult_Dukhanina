@@ -5,8 +5,9 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import ExpiredSignatureError, JWTError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.exceptions import InvalidTokenError, TokenExpiredError
+from app.core.exceptions import InvalidTokenError, TokenExpiredError, UserNotFoundError
 from app.core.security import decode_token
+from app.db.models import User
 from app.db.session import AsyncSessionLocal
 from app.repositories.users import UsersRepository
 from app.usecases.auth import AuthUsecase
@@ -43,3 +44,13 @@ def get_current_user_id(token: str = Depends(oauth2_scheme)) -> int:
         return int(sub)
     except ValueError:
         raise InvalidTokenError()
+
+
+async def get_current_user(
+    user_id: int = Depends(get_current_user_id),
+    users_repo: UsersRepository = Depends(get_users_repo),
+) -> User:
+    user = await users_repo.get_by_id(user_id)
+    if user is None:
+        raise UserNotFoundError()
+    return user
