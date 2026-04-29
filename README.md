@@ -71,6 +71,20 @@ docker compose up -d --build
 - Auth Swagger: `http://localhost:9000/docs`
 - RabbitMQ UI: `http://localhost:15672` (`guest` / `guest`)
 
+## Скриншоты работы Auth Service (Swagger)
+
+### Регистрация (`POST /auth/register`, 200)
+![Auth register 200](Screens/auth-register-200.png)
+
+### Логин и получение JWT (`POST /auth/login`, 200)
+![Auth login 200 token](Screens/auth-login-200-token.png)
+
+### Профиль по валидному токену (`GET /auth/me`, 200)
+![Auth me 200](Screens/auth-me-200.png)
+
+### Отказ без токена (`GET /auth/me`, 401)
+![Auth me 401](Screens/auth-me-401.png%20.png)
+
 ## Тестирование
 
 Локальный запуск тестов (без Docker и внешних сервисов):
